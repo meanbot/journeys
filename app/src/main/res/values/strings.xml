@@ -6,4 +6,7 @@
 
     <string name="loginText">Login</string>
 
+    <string name="searchJourneyHintString">Take a journey</string>
+    <string name="requestJourneyString">Request a journey</string>
+
 </resources>
