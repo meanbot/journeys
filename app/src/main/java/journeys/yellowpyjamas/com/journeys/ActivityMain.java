@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import journeys.yellowpyjamas.com.journeys.support.Constants;
@@ -18,15 +20,30 @@ public class ActivityMain extends Activity {
     EditText searchJourneyEdit;
 
     Button requestJourneyButton;
-    Button recordJourneyButton;
 
-    ListView journeyList;
+    ImageButton recordJourneyButton;
+
+    GridView journeyList;
 
     Button prototypeJoinButton;
     Button prototypeStartButton;
 
     private static final int REQUEST_VISIBLE = 0;
     private static final int RECORD_VISIBLE = 1;
+
+    static final String[] gridImage = new String[] {
+            "image1",
+            "image2",
+            "image3",
+            "image4",
+            "image5",
+            "image6",
+            "image7",
+            "image8",
+            "image9",
+            "image10",
+            "image11"
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,9 +56,9 @@ public class ActivityMain extends Activity {
         setContentView(R.layout.layout_main);
 
         searchJourneyEdit = (EditText)findViewById(R.id.searchJourneyEdit);
-        journeyList = (ListView)findViewById(R.id.journeyList);
+        journeyList = (GridView)findViewById(R.id.journeyList);
         requestJourneyButton = (Button)findViewById(R.id.requestJourneyButton);
-        recordJourneyButton = (Button)findViewById(R.id.recordJourneyButton);
+        recordJourneyButton = (ImageButton)findViewById(R.id.recordJourneyButton);
         prototypeJoinButton = (Button)findViewById(R.id.prototypeJoinButton);
         prototypeStartButton = (Button)findViewById(R.id.prototypeStartButton);
 
@@ -82,6 +99,20 @@ public class ActivityMain extends Activity {
                 doStart();
             }
         });
+
+        // Set custom adapter (GridAdapter) to gridview
+
+        journeyList.setAdapter(new GridAdapter(this, gridImage));
+
+        journeyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                gridItemClick(id);
+            }
+        });
+    }
+
+    private void gridItemClick(long id) {
+        Toast.makeText(ActivityMain.this, "Grid click: " + id, Toast.LENGTH_SHORT).show();
     }
 
     private void toggleVisibility(int visibility) {
