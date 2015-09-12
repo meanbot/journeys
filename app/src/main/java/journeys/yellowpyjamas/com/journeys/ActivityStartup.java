@@ -4,6 +4,7 @@ import journeys.yellowpyjamas.com.journeys.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -112,6 +113,14 @@ public class ActivityStartup extends Activity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+
+        loadPage();
+    }
+
+    private void loadPage() {
+        // Just go to the login page for now, more logic to follow later
+        Intent loginIntent = new Intent(ActivityStartup.this, ActivityLogin.class);
+        startActivity(loginIntent);
     }
 
     @Override
